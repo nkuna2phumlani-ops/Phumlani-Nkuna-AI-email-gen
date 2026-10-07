@@ -299,7 +299,7 @@ function useAi<A, R>(fn: (a: A) => Promise<R>) {
   const [error, setError] = useState<string | null>(null);
   const run = async (a: A): Promise<R | undefined> => {
     setLoading(true); setError(null);
-    try { return await fn(a); } catch (e) { setError(e instanceof Error ? e.message : "Unknown error"); } finally { setLoading(false); }
+    try { return await fn(a); } catch (e) { setError(e instanceof Error ? e.message : "Unknown error"); return undefined; } finally { setLoading(false); }
   };
   return { run, loading, error };
 }

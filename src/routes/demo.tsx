@@ -38,7 +38,7 @@ function Demo() {
           </li>
         ))}
       </ol>
-      <p className="mb-5 rounded-xl bg-secondary px-4 py-3 text-sm text-secondary-foreground">{STEPS[i].h}</p>
+      <p className="mb-5 rounded-xl bg-secondary px-4 py-3 text-sm text-secondary-foreground">{STEPS[i]?.h}</p>
       {i === 0 && <SummarizeStep onDone={next} />}
       {i === 1 && <TasksStep onDone={next} />}
       {i === 2 && <ScheduleStep onDone={next} />}
