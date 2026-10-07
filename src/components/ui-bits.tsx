@@ -65,7 +65,8 @@ export function ErrorBox({ message, onRetry }: { message: string; onRetry?: () =
   );
 }
 
-export function Empty({ title, text, to, cta }: { title: string; text: string; to?: string; cta?: string }) {
+export type AppPath = "/" | "/demo" | "/meetings" | "/tasks" | "/schedule" | "/email";
+export function Empty({ title, text, to, cta }: { title: string; text: string; to?: AppPath; cta?: string }) {
   return (
     <div className="glass flex flex-col items-center p-8 text-center">
       <p className="font-display text-xl">{title}</p>
@@ -96,12 +97,12 @@ export function usePipeline() {
   const m = state.meetings[0];
   const tasks = state.tasks;
   return [
-    { key: "notes", label: "Meeting notes", to: "/meetings", done: !!m },
-    { key: "summary", label: "AI summary", to: "/meetings", done: !!m?.approved },
-    { key: "tasks", label: "Tasks", to: "/tasks", done: tasks.length > 0 },
-    { key: "priority", label: "Priorities", to: "/tasks", done: tasks.length > 0 && tasks.every((t) => t.priority) },
-    { key: "schedule", label: "Schedule", to: "/schedule", done: !!state.schedule?.approved },
-    { key: "email", label: "Follow-up email", to: "/email", done: !!state.email },
+    { key: "notes", label: "Meeting notes", to: "/meetings" as AppPath, done: !!m },
+    { key: "summary", label: "AI summary", to: "/meetings" as AppPath, done: !!m?.approved },
+    { key: "tasks", label: "Tasks", to: "/tasks" as AppPath, done: tasks.length > 0 },
+    { key: "priority", label: "Priorities", to: "/tasks" as AppPath, done: tasks.length > 0 && tasks.every((t) => t.priority) },
+    { key: "schedule", label: "Schedule", to: "/schedule" as AppPath, done: !!state.schedule?.approved },
+    { key: "email", label: "Follow-up email", to: "/email" as AppPath, done: !!state.email },
   ];
 }
 
@@ -140,12 +141,12 @@ export function Pipeline() {
 export function NavLinks({ mobile }: { mobile?: boolean }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const items = [
-    { to: "/", label: "Home" },
-    { to: "/demo", label: "Guided demo" },
-    { to: "/meetings", label: "Meetings" },
-    { to: "/tasks", label: "Tasks" },
-    { to: "/schedule", label: "Schedule" },
-    { to: "/email", label: "Email" },
+    { to: "/" as AppPath, label: "Home" },
+    { to: "/demo" as AppPath, label: "Guided demo" },
+    { to: "/meetings" as AppPath, label: "Meetings" },
+    { to: "/tasks" as AppPath, label: "Tasks" },
+    { to: "/schedule" as AppPath, label: "Schedule" },
+    { to: "/email" as AppPath, label: "Email" },
   ];
   const list = mobile ? items.filter((i) => i.to !== "/demo") : items;
   return (
