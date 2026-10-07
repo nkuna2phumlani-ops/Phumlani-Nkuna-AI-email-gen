@@ -3,13 +3,13 @@ import type { SummaryResult, ScheduleResult, EmailResult } from "./ai.functions"
 
 export type Meeting = { id: string; title: string; date: string; notes: string; summary?: SummaryResult; approved: boolean };
 export type Task = {
-  id: string; title: string; owner: string; deadline: string; meetingId?: string;
-  priority?: "high" | "medium" | "low"; reason?: string; done: boolean; ai: boolean;
+  id: string; title: string; owner: string; deadline: string; meetingId?: string | undefined;
+  priority?: "high" | "medium" | "low" | undefined; reason?: string | undefined; done: boolean; ai: boolean;
 };
 export type State = {
   meetings: Meeting[]; tasks: Task[];
-  schedule?: ScheduleResult & { approved: boolean };
-  email?: EmailResult & { meetingId?: string };
+  schedule?: (ScheduleResult & { approved: boolean }) | undefined;
+  email?: (EmailResult & { meetingId?: string | undefined }) | undefined;
 };
 
 const KEY = "workflow-ai-v1";
