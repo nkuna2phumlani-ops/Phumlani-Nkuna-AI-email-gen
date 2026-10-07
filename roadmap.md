@@ -1,0 +1,2 @@
+- [ ] Build WorkFlow AI (dashboard, meetings, tasks, schedule, email, demo)
+- [ ] Make it user friendly (plain guidance, clear next steps)
